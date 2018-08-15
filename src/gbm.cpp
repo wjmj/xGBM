@@ -74,8 +74,8 @@ vector<double> GBM::predict(vector<vector<double>>& X)
 {
     int num_samples = X.size();
     vector<double> result(num_samples, 0.);
-    for (int num = 0; num < num_samples; num++)
 #pragma omp parallel for
+    for (int num = 0; num < num_samples; num++)
     for (int i = 0; i < best_iteration; i++)
     {
         result[num] += trees[i].predict(X[num]) * learning_rate;
@@ -92,8 +92,8 @@ vector<double> GBM::getScores(vector<vector<double>>& X, int iter)
     
     int num_samples = X.size();
     vector<double> res(num_samples, 0.);
-    for (int num = 0; num < num_samples; num++)
 #pragma omp parallel for
+    for (int num = 0; num < num_samples; num++)
     for (int i = 0; i <= iter; i++)
     {
         res[num] += trees[i].predict(X[num]) * learning_rate;
